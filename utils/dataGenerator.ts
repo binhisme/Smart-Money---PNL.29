@@ -47,8 +47,11 @@ export const generatePnLDataForMonth = (monthName: string, year: number, targetT
     return data;
   }
 
-  // Phân bổ lợi nhuận
-  const lossDaysRatio = 0.2; 
+  // Tạo tỷ lệ thắng dao động từ 61-77% (không trùng nhau dựa trên tháng/năm)
+  const seed = (monthInt * 13) + (year * 7);
+  const targetWinRate = 61 + (seed % 17); // 61% đến 77%
+  const lossDaysRatio = (100 - targetWinRate) / 100; 
+
   const lossDaysCount = Math.floor(activeDaysCount * lossDaysRatio);
   const profitDaysCount = activeDaysCount - lossDaysCount;
 

@@ -34,11 +34,10 @@ const App: React.FC = () => {
 
   /**
    * Cập nhật lợi nhuận:
-   * 04/02 và 05/02 bổ sung (Giả định mỗi ngày ~1%):
-   * Tổng lợi nhuận mới: 316.3% + 2.07% (của 4/2 và 5/2) = 318.37%
+   * Tổng lợi nhuận: 318.37% (đã bao gồm 4/2 và 5/2)
    */
   const monthlyResults = useMemo(() => [
-    { id: 'm8', month: 'Tháng 02', year: 2026, result: 5.62, highest: false }, // 3.55 + 2.07
+    { id: 'm8', month: 'Tháng 02', year: 2026, result: 5.62, highest: false },
     { id: 'm7', month: 'Tháng 01', year: 2026, result: 7.95, highest: false },
     { id: 'm6', month: 'Tháng 12', year: 2025, result: 42.15, highest: true },
     { id: 'm5', month: 'Tháng 11', year: 2025, result: 45.80, highest: false },
@@ -96,17 +95,17 @@ const App: React.FC = () => {
   ], []);
 
   /**
-   * Tính toán tài chính cập nhật:
+   * Tính toán tài chính mới:
    * Nạp gốc: $15,000.00
    * Lợi nhuận: 318.37% ($15,000 * 3.1837 = $47,755.50)
-   * Tổng cộng (Nạp + Lãi): $15,000 + $47,755.5 = $62,755.50
-   * Đã rút: $11,000.00
-   * Tài sản hiện có: $62,755.5 - $11,000 = $51,755.50
+   * Tổng cộng (Nạp + Lãi): $15,000 + $47,755.50 = $62,755.50
+   * Đã rút: $25,500.00
+   * Tài sản hiện có: $62,755.50 - $25,500.00 = $37,255.50
    */
   const financeData = {
-    assets: 51755.50, 
+    assets: 37255.50, 
     deposited: 15000.00,
-    withdrawn: 11000.00,
+    withdrawn: 25500.00,
     profitPercent: "318.37"
   };
 
