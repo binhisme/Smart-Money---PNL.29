@@ -39,9 +39,9 @@ export const generatePnLDataForMonth = (monthName: string, year: number, targetT
 
   const isFeb2026 = monthInt === 2 && year === 2026;
   
-  // Giới hạn ngày hiện tại: Cập nhật đến ngày 05/02/2026
+  // Giới hạn ngày hiện tại: Cập nhật đến ngày 06/02/2026
   const isFutureMonth = (year > 2026) || (year === 2026 && monthInt > 2);
-  const currentDayLimit = isFutureMonth ? 0 : (isFeb2026 ? 5 : daysInMonth);
+  const currentDayLimit = isFutureMonth ? 0 : (isFeb2026 ? 6 : daysInMonth);
 
   const data: DailyPnL[] = [];
   

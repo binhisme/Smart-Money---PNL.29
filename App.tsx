@@ -34,10 +34,11 @@ const App: React.FC = () => {
 
   /**
    * Cập nhật lợi nhuận:
-   * Tổng lợi nhuận: 318.37% (đã bao gồm 4/2 và 5/2)
+   * Tổng lợi nhuận: 319.82% (đã bao gồm 6/2: +1.45%)
+   * Tháng 2/2026: 5.62 + 1.45 = 7.07%
    */
   const monthlyResults = useMemo(() => [
-    { id: 'm8', month: 'Tháng 02', year: 2026, result: 5.62, highest: false },
+    { id: 'm8', month: 'Tháng 02', year: 2026, result: 7.07, highest: false },
     { id: 'm7', month: 'Tháng 01', year: 2026, result: 7.95, highest: false },
     { id: 'm6', month: 'Tháng 12', year: 2025, result: 42.15, highest: true },
     { id: 'm5', month: 'Tháng 11', year: 2025, result: 45.80, highest: false },
@@ -94,19 +95,11 @@ const App: React.FC = () => {
     { rank: 5, name: 'Velocity Break Structure (VBS)', pnl24h: 87, amount: 1240.0, private: false },
   ], []);
 
-  /**
-   * Tính toán tài chính mới:
-   * Nạp gốc: $15,000.00
-   * Lợi nhuận: 318.37% ($15,000 * 3.1837 = $47,755.50)
-   * Tổng cộng (Nạp + Lãi): $15,000 + $47,755.50 = $62,755.50
-   * Đã rút: $25,500.00
-   * Tài sản hiện có: $62,755.50 - $25,500.00 = $37,255.50
-   */
   const financeData = {
-    assets: 37255.50, 
+    assets: 37473.00, 
     deposited: 15000.00,
     withdrawn: 25500.00,
-    profitPercent: "318.37"
+    profitPercent: "319.82"
   };
 
   return (
@@ -305,70 +298,74 @@ const App: React.FC = () => {
             <div className="flex-1 overflow-y-auto custom-scrollbar">
                <div className={`p-4 lg:p-6 space-y-6 ${isHistoryExpanded ? 'max-w-5xl mx-auto w-full' : ''}`}>
                   
-                  <div className="grid grid-cols-3 gap-2">
-                     <div className="bg-[#0a0a0a] border border-white/5 rounded-[1.5rem] p-3 lg:p-4 flex flex-col items-center justify-center transition-all hover:bg-white/[0.02]">
-                        <span className="text-[6px] lg:text-[8px] text-gray-500 font-bold uppercase tracking-[0.1em] mb-1">PNL THÁNG</span>
-                        <p className="text-sm lg:text-lg font-black text-green-500 tracking-tighter">+{currentMonthData.result.toFixed(2)}%</p>
+                  {/* Stats Section with deep contrast colors */}
+                  <div className="grid grid-cols-3 gap-2 lg:gap-3">
+                     <div className="bg-[#0f1a0f] border border-green-500/20 rounded-[1.25rem] lg:rounded-[1.5rem] p-3 lg:p-5 flex flex-col items-center justify-center transition-all hover:bg-green-500/[0.05]">
+                        <span className="text-[7px] lg:text-[9px] text-green-500/60 font-black uppercase tracking-[0.15em] mb-1 lg:mb-2">PNL THÁNG</span>
+                        <p className="text-sm lg:text-xl font-black text-green-400 tracking-tighter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]">+{currentMonthData.result.toFixed(2)}%</p>
                      </div>
-                     <div className="bg-[#0a0a0a] border border-white/5 rounded-[1.5rem] p-3 lg:p-4 flex flex-col items-center justify-center transition-all hover:bg-white/[0.02]">
-                        <span className="text-[6px] lg:text-[8px] text-gray-500 font-bold uppercase tracking-[0.1em] mb-1">TRUNG BÌNH</span>
-                        <p className="text-sm lg:text-lg font-black text-blue-400 tracking-tighter">+{stats.averagePnL}%</p>
+                     <div className="bg-[#0f1420] border border-blue-500/20 rounded-[1.25rem] lg:rounded-[1.5rem] p-3 lg:p-5 flex flex-col items-center justify-center transition-all hover:bg-blue-500/[0.05]">
+                        <span className="text-[7px] lg:text-[9px] text-blue-500/60 font-black uppercase tracking-[0.15em] mb-1 lg:mb-2">TRUNG BÌNH</span>
+                        <p className="text-sm lg:text-xl font-black text-blue-400 tracking-tighter drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]">+{stats.averagePnL}%</p>
                      </div>
-                     <div className="bg-[#0a0a0a] border border-white/5 rounded-[1.5rem] p-3 lg:p-4 flex flex-col items-center justify-center transition-all hover:bg-white/[0.02]">
-                        <span className="text-[6px] lg:text-[8px] text-gray-500 font-bold uppercase tracking-[0.1em] mb-1">TỶ LỆ THẮNG</span>
-                        <p className="text-sm lg:text-lg font-black text-white tracking-tighter">{stats.winRate}%</p>
+                     <div className="bg-[#1a1a1a] border border-white/10 rounded-[1.25rem] lg:rounded-[1.5rem] p-3 lg:p-5 flex flex-col items-center justify-center transition-all hover:bg-white/[0.05]">
+                        <span className="text-[7px] lg:text-[9px] text-gray-500 font-black uppercase tracking-[0.15em] mb-1 lg:mb-2">TỶ LỆ THẮNG</span>
+                        <p className="text-sm lg:text-xl font-black text-white tracking-tighter">{stats.winRate}%</p>
                      </div>
                   </div>
 
                   <div className="pb-8">
                     {historyMode === 'grid' ? (
-                       <div className={`grid ${isHistoryExpanded ? 'grid-cols-4 sm:grid-cols-7' : 'grid-cols-4'} gap-2.5`}>
+                       <div className={`grid ${isHistoryExpanded ? 'grid-cols-4 sm:grid-cols-7' : 'grid-cols-4'} gap-3 lg:gap-4`}>
                           {pnlHistoryFullMonth.map((item, idx) => {
                              const dayNum = item.date.split('-')[2];
                              const hasData = item.percentage !== 0;
 
                              return (
-                                <div key={idx} className={`aspect-square relative flex flex-col items-center justify-center rounded-[0.85rem] border transition-all ${
+                                <div key={idx} className={`aspect-square relative flex flex-col items-center justify-center rounded-[1rem] border transition-all duration-300 ${
                                    !hasData 
-                                   ? 'border-white/[0.03] bg-[#080808] opacity-20'
+                                   ? 'border-white/[0.03] bg-[#050505] opacity-20'
                                    : item.isProfit 
-                                     ? 'border-green-500/20 bg-green-500/[0.03] shadow-[inset_0_0_20px_rgba(34,197,94,0.02)]' 
-                                     : 'border-red-500/20 bg-red-500/[0.03] shadow-[inset_0_0_20px_rgba(239,68,68,0.02)]'
+                                     ? 'border-green-500/50 bg-[#0a150a] shadow-[0_0_25px_rgba(34,197,94,0.15)] ring-1 ring-green-500/20' 
+                                     : 'border-red-500/50 bg-[#150a0a] shadow-[0_0_25px_rgba(239,68,68,0.15)] ring-1 ring-red-500/20'
                                 }`}>
-                                   <span className="absolute top-2 left-2 text-[8px] font-bold text-gray-600 tracking-tight">{dayNum}</span>
+                                   {/* Day number with high visibility */}
+                                   <span className={`absolute top-2 left-2.5 text-[9px] font-black tracking-tighter ${hasData ? 'text-white' : 'text-gray-700'}`}>
+                                      {dayNum}
+                                   </span>
                                    
                                    {hasData ? (
                                      <>
-                                        <p className={`text-[10px] sm:text-[11px] lg:text-[13px] font-black tracking-tighter text-center leading-none ${item.isProfit ? 'text-green-500' : 'text-red-500'}`}>
+                                        <p className={`text-[10px] sm:text-[12px] lg:text-[14px] font-black tracking-tighter text-center leading-none drop-shadow-[0_0_5px_rgba(0,0,0,0.5)] ${item.isProfit ? 'text-green-300' : 'text-red-300'}`}>
                                           {item.isProfit ? '+' : '-'}{Math.abs(item.percentage).toFixed(2)}%
                                         </p>
-                                        <div className={`absolute bottom-2.5 w-5 h-[2px] rounded-full opacity-50 ${item.isProfit ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                        <div className={`absolute bottom-3 w-6 h-[2px] rounded-full ${item.isProfit ? 'bg-green-400 shadow-[0_0_12px_rgba(34,197,94,0.8)]' : 'bg-red-400 shadow-[0_0_12px_rgba(239,68,68,0.8)]'}`}></div>
                                      </>
                                    ) : (
-                                     <div className="w-4 h-[1px] bg-white/10 rounded-full mt-4"></div>
+                                     <div className="w-2 h-[1px] bg-white/5 rounded-full mt-4"></div>
                                    )}
                                 </div>
                              );
                           })}
                        </div>
                     ) : (
-                       <div className="space-y-2.5">
+                       <div className="space-y-3">
                           {pnlHistoryFullMonth.filter(d => d.percentage !== 0).reverse().map((item, idx) => (
-                             <div key={idx} className="bg-[#0a0a0a] border border-white/5 p-3 rounded-[1.25rem] flex items-center justify-between group hover:bg-white/[0.03] transition-all">
-                                <div className="flex items-center space-x-3.5">
-                                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${item.isProfit ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}`}>
-                                      {item.isProfit ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+                             <div key={idx} className="bg-white/[0.03] border border-white/5 p-4 rounded-[1.25rem] flex items-center justify-between group hover:bg-white/[0.08] transition-all hover:border-white/20">
+                                <div className="flex items-center space-x-4">
+                                   <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${item.isProfit ? 'bg-green-500/30 text-green-300' : 'bg-red-500/30 text-red-300'}`}>
+                                      {item.isProfit ? <ArrowUpRight size={20} /> : <ArrowDownRight size={20} />}
                                    </div>
                                    <div>
-                                      <p className="text-[8px] text-gray-500 font-bold">{item.date.split('-').reverse().join('/')}</p>
-                                      <p className={`text-sm lg:text-base font-black tracking-tighter leading-tight ${item.isProfit ? 'text-green-500' : 'text-red-500'}`}>
+                                      <p className="text-[10px] text-gray-500 font-black tracking-widest">{item.date.split('-').reverse().join('/')}</p>
+                                      <p className={`text-sm lg:text-lg font-black tracking-tighter leading-tight mt-0.5 ${item.isProfit ? 'text-green-300' : 'text-red-300'}`}>
                                          {item.isProfit ? '+' : '-'}{Math.abs(item.percentage).toFixed(2)}%
                                       </p>
                                    </div>
                                 </div>
                                 <div className="flex flex-col items-end">
-                                   <span className="text-[7px] font-bold text-gray-600 uppercase tracking-widest">{item.strategy?.split(' ')[0] || 'SmartMoney-X'}</span>
-                                   <ChevronRight size={14} className="text-gray-800" />
+                                   <span className="text-[9px] font-black text-white/50 uppercase tracking-[0.2em] italic">{item.strategy?.split(' ')[0] || 'SmartMoney'}</span>
+                                   <ChevronRight size={18} className="text-gray-700 group-hover:text-red-500 transition-colors" />
                                 </div>
                              </div>
                           ))}
@@ -378,19 +375,19 @@ const App: React.FC = () => {
                </div>
             </div>
 
-            <div className="bg-[#030303] border-t border-white/5 p-5 lg:p-7 space-y-4 sticky bottom-0 z-40">
-               <div className={`bg-red-600/[0.03] border border-red-500/10 rounded-2xl p-4 flex items-start space-x-3 ${isHistoryExpanded ? 'max-w-4xl mx-auto w-full' : ''}`}>
-                  <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={14} />
-                  <p className="text-[10px] text-gray-500 font-medium leading-tight">
-                    <span className="text-red-500 font-black uppercase italic mr-1">Nguyên tắc:</span> Không chốt lỗ quá 3%/ngày. Nếu các Master vi phạm vui lòng báo cáo Admin của Smart Money.
+            <div className="bg-[#030303] border-t border-white/10 p-5 lg:p-7 space-y-4 sticky bottom-0 z-40">
+               <div className={`bg-red-600/[0.06] border border-red-500/30 rounded-2xl p-4 flex items-start space-x-3 backdrop-blur-md ${isHistoryExpanded ? 'max-w-4xl mx-auto w-full' : ''}`}>
+                  <AlertCircle className="text-red-400 flex-shrink-0 mt-0.5" size={18} />
+                  <p className="text-[11px] lg:text-[12px] text-gray-300 font-semibold leading-relaxed">
+                    <span className="text-red-400 font-black uppercase italic mr-1">Nguyên tắc:</span> Không chốt lỗ quá 3%/ngày. Nếu các Master vi phạm vui lòng báo cáo Admin để được hỗ trợ bảo hiểm 100% vốn.
                   </p>
                </div>
 
                <div className={`flex items-center space-x-3 ${isHistoryExpanded ? 'max-w-4xl mx-auto w-full' : ''}`}>
-                  <button className="flex-[2.5] py-4 bg-black border border-white/5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] text-white active:scale-95 hover:bg-white/5 transition-all italic">
+                  <button className="flex-[2.5] py-4 bg-white/[0.05] border border-white/20 rounded-2xl text-[12px] font-black uppercase tracking-[0.3em] text-white active:scale-95 hover:bg-white/10 transition-all italic shadow-2xl">
                     SmartMoney
                   </button>
-                  <button className="flex-1 py-4 bg-transparent border border-red-500/40 rounded-2xl text-[10px] font-black uppercase text-red-500 active:scale-95 hover:bg-red-500/10 transition-all tracking-widest">
+                  <button className="flex-1 py-4 bg-transparent border border-red-500/50 rounded-2xl text-[10px] font-black uppercase text-red-500 active:scale-95 hover:bg-red-500/10 transition-all tracking-widest hover:border-red-500 shadow-lg">
                     BÁO CÁO
                   </button>
                </div>
