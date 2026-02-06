@@ -35,7 +35,7 @@ const App: React.FC = () => {
   /**
    * Cập nhật lợi nhuận:
    * Tổng lợi nhuận: 319.82% (đã bao gồm 6/2: +1.45%)
-   * Tháng 2/2026: 5.62 + 1.45 = 7.07%
+   * Tháng 2/2026: 7.07%
    */
   const monthlyResults = useMemo(() => [
     { id: 'm8', month: 'Tháng 02', year: 2026, result: 7.07, highest: false },
@@ -379,7 +379,7 @@ const App: React.FC = () => {
                <div className={`bg-red-600/[0.06] border border-red-500/30 rounded-2xl p-4 flex items-start space-x-3 backdrop-blur-md ${isHistoryExpanded ? 'max-w-4xl mx-auto w-full' : ''}`}>
                   <AlertCircle className="text-red-400 flex-shrink-0 mt-0.5" size={18} />
                   <p className="text-[11px] lg:text-[12px] text-gray-300 font-semibold leading-relaxed">
-                    <span className="text-red-400 font-black uppercase italic mr-1">Nguyên tắc:</span> Không chốt lỗ quá 3%/ngày. Nếu các Master vi phạm vui lòng báo cáo Admin để được hỗ trợ bảo hiểm 100% vốn.
+                    <span className="text-red-400 font-black uppercase italic mr-1">Nguyên tắc:</span> Không chốt lỗ quá 3%/ngày. Nếu các Master vi phạm vui lòng báo cáo Admin.
                   </p>
                </div>
 
