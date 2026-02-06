@@ -34,8 +34,7 @@ const App: React.FC = () => {
 
   /**
    * Cập nhật lợi nhuận:
-   * Tổng lợi nhuận: 319.82% (đã bao gồm 6/2: +1.45%)
-   * Tháng 2/2026: 7.07%
+   * Tháng 2/2026: 5.62 + 1.45 = 7.07%
    */
   const monthlyResults = useMemo(() => [
     { id: 'm8', month: 'Tháng 02', year: 2026, result: 7.07, highest: false },
