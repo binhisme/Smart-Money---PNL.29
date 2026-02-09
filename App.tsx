@@ -33,11 +33,14 @@ const App: React.FC = () => {
   const username = "PNL.29";
 
   /**
-   * Cập nhật lợi nhuận:
-   * Tháng 2/2026: 5.62 + 1.45 = 7.07%
+   * Cập nhật lợi nhuận theo yêu cầu mới:
+   * Ngày 7/2: -1.82%
+   * Ngày 8/2: -1.40%
+   * Ngày 9/2: +6.37%
+   * Tổng cộng tháng 2/2026: 7.07% (cũ) - 1.82 - 1.40 + 6.37 = 10.22%
    */
   const monthlyResults = useMemo(() => [
-    { id: 'm8', month: 'Tháng 02', year: 2026, result: 7.07, highest: false },
+    { id: 'm8', month: 'Tháng 02', year: 2026, result: 10.22, highest: false },
     { id: 'm7', month: 'Tháng 01', year: 2026, result: 7.95, highest: false },
     { id: 'm6', month: 'Tháng 12', year: 2025, result: 42.15, highest: true },
     { id: 'm5', month: 'Tháng 11', year: 2025, result: 45.80, highest: false },
@@ -94,11 +97,19 @@ const App: React.FC = () => {
     { rank: 5, name: 'Velocity Break Structure (VBS)', pnl24h: 87, amount: 1240.0, private: false },
   ], []);
 
+  /**
+   * Tính toán tài chính mới:
+   * Nạp gốc: $15,000.00
+   * Đã rút: $25,500.00
+   * Lợi nhuận mới: 319.82% + 3.15% (từ 7/2 đến 9/2) = 322.97%
+   * Số tiền lãi: $15,000 * 3.2297 = $48,445.50
+   * Tài sản hiện có: $15,000 + $48,445.50 - $25,500 = $37,945.50
+   */
   const financeData = {
-    assets: 37473.00, 
+    assets: 37945.50, 
     deposited: 15000.00,
     withdrawn: 25500.00,
-    profitPercent: "319.82"
+    profitPercent: "322.97"
   };
 
   return (

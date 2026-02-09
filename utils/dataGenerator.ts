@@ -39,7 +39,10 @@ export const generatePnLDataForMonth = (monthName: string, year: number, targetT
       { percentage: 1.96, isProfit: true },  // Ngày 3
       { percentage: 2.59, isProfit: true },  // Ngày 4
       { percentage: 1.04, isProfit: true },  // Ngày 5
-      { percentage: 1.45, isProfit: true },  // Ngày 6 (Mới thêm)
+      { percentage: 1.45, isProfit: true },  // Ngày 6
+      { percentage: 1.82, isProfit: false }, // Ngày 7 (Mới thêm)
+      { percentage: 1.40, isProfit: false }, // Ngày 8 (Mới thêm)
+      { percentage: 6.37, isProfit: true },  // Ngày 9 (Mới thêm)
     ];
 
     for (let i = 1; i <= daysInMonth; i++) {
